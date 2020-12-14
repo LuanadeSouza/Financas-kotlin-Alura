@@ -21,19 +21,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/receita"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/despesa"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/total"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -46,30 +46,30 @@
                 android:id="@+id/resumo_card_receita"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:textSize="20dp"
+                android:layout_gravity="end"
+                android:textSize="20sp"
                 tools:text="R$ 1000000,00" />
 
             <TextView
                 android:id="@+id/resumo_card_despesa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:textSize="20dp"
+                android:layout_gravity="end"
+                android:textSize="20sp"
                 tools:text="R$ 10000,00" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:background="#848484" />
 
             <TextView
                 android:id="@+id/resumo_card_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:textSize="20dp"
+                android:layout_gravity="end"
+                android:textSize="20sp"
                 tools:text="R$ 1000,00" />
 
         </LinearLayout>

@@ -43,7 +43,7 @@
         android:layout_marginRight="5dp"
         android:text="@string/categoria"
         android:textColor="#7b7b7b"
-        android:textSize="12dp" />
+        android:textSize="12sp" />
 
     <Spinner
         android:id="@+id/form_transacao_categoria"

@@ -17,8 +17,6 @@
             android:id="@+id/lista_transacoes_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignBottom="@id/lista_transacoes_resumo"
-            android:layout_alignParentBottom="true"
             android:divider="@null"
             android:dividerHeight="0dp" />
 
@@ -28,11 +26,11 @@
         android:id="@+id/lista_transacoes_adiciona_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:paddingBottom="10dp"
         fab:menu_backgroundColor="#ccffffff"
         fab:menu_colorNormal="#367C25"
         fab:menu_colorPressed="#266817"
