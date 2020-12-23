@@ -16,7 +16,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_transacoes)
         val transacoes = listOf(
-            Transacao(valor = BigDecimal(20.5), tipo = Tipo.DESPESA, categoria = "Prêmio"),
+            Transacao(valor = BigDecimal(20.5), tipo = Tipo.DESPESA, categoria = "Almoço de Final de Semana"),
             Transacao(valor = BigDecimal(100.0), tipo = Tipo.RECEITA, categoria = "Economia")
         )
         lista_transacoes_listview.adapter = ListaTransacoesAdapter(transacoes, this)

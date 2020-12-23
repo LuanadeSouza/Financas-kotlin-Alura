@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import br.com.luanadev.financasapplication.R
 import br.com.luanadev.financasapplication.extension.formataDataParaBrasileiro
 import br.com.luanadev.financasapplication.extension.formataParaBrasileiro
+import br.com.luanadev.financasapplication.extension.limitaEmAte
 import br.com.luanadev.financasapplication.model.Tipo
 import br.com.luanadev.financasapplication.model.Transacao
 import kotlinx.android.synthetic.main.transacao_item.view.*
@@ -34,7 +35,7 @@ class ListaTransacoesAdapter(
         }
 
         viewCriada.transacao_valor.text = transacao.valor.formataParaBrasileiro()
-        viewCriada.transacao_categoria.text = transacao.categoria
+        viewCriada.transacao_categoria.text = transacao.categoria.limitaEmAte(14)
         viewCriada.transacao_data.text = transacao.data.formataDataParaBrasileiro()
 
         return viewCriada
