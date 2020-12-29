@@ -10,7 +10,7 @@ import br.com.luanadev.financasapplication.ui.adapter.ListaTransacoesAdapter
 import kotlinx.android.synthetic.main.activity_lista_transacoes.*
 import java.math.BigDecimal
 
-class ListaTransacoesActivity : AppCompatActivity() {
+class   ListaTransacoesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
