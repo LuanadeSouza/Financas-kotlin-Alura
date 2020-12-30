@@ -6,19 +6,28 @@
         <item>Empréstimo</item>
         <item>Pagamento</item>
         <item>Presente</item>
-        <item>Salário</item>
+        <item>Salário Luana</item>
+        <item>Salário Weslley</item>
         <item>Vendas</item>
+        <item>Reembolso Cultura Inglêsa</item>
     </string-array>
     <string-array name="categorias_de_despesa">
         <item>Despesa indefinida</item>
         <item>Casa</item>
         <item>Comida</item>
         <item>Comunicações</item>
-        <item>Contas</item>
+        <item>Contas Aguá</item>
+        <item>Contas Luz</item>
+        <item>Contas Estacionamento</item>
         <item>Lazer</item>
         <item>Roupas</item>
         <item>Saúde</item>
-        <item>Supermercado</item>
+        <item>Supermercado Bergamini</item>
+        <item>Supermercado Macro</item>
+        <item>Supermercado Assai</item>
+        <item>Padaria Nazaré</item>
+        <item>Supermercado Bergamini Nazaré</item>
+        <item>Supermercado bergamini</item>
         <item>Transporte</item>
     </string-array>
     <string-array name="meses">
