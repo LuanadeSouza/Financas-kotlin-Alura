@@ -1,7 +1,6 @@
 package br.com.luanadev.financasapplication.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import br.com.luanadev.financasapplication.R
@@ -17,13 +16,13 @@ import kotlinx.android.synthetic.main.activity_lista_transacoes.*
 class ListaTransacoesActivity : AppCompatActivity() {
 
     private val transacoes: MutableList<Transacao> = mutableListOf()
-    private lateinit var viewDaActivity: View
+    private val viewDaActivity by lazy { window.decorView }
+    private val viewGroupDaActivity by lazy { viewDaActivity as ViewGroup }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_transacoes)
 
-        viewDaActivity = window.decorView
         configuraResumo()
         configuraLista()
         adicionaReceita(Tipo.RECEITA)
@@ -32,7 +31,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
     private fun adicionaDespesa(tipo: Tipo) {
         lista_transacoes_adiciona_despesa.setOnClickListener {
-            AdicionaDialog(viewDaActivity as ViewGroup, this)
+            AdicionaDialog(viewGroupDaActivity, this)
                 .show(tipo, object : TransacaoDelegate {
                     override fun delegate(transacao: Transacao) {
                         atualizaTransacoes()
@@ -44,7 +43,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
     private fun adicionaReceita(tipo: Tipo) {
         lista_transacoes_adiciona_receita.setOnClickListener {
-            AdicionaDialog(viewDaActivity as ViewGroup, this)
+            AdicionaDialog(viewGroupDaActivity, this)
                 .show(
                     tipo,
                     object : TransacaoDelegate {
