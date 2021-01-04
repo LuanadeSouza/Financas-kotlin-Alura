@@ -19,7 +19,7 @@ import java.math.BigDecimal
 import java.util.*
 
 abstract class FormularioTransacaoDialog(
-    val context: Context,
+    protected val context: Context,
     private val viewGroup: ViewGroup
 ) {
 
@@ -29,13 +29,13 @@ abstract class FormularioTransacaoDialog(
     protected val campoData = viewCriada.form_transacao_data
     abstract val tituloBotaoPositivo: String
 
-    fun chama(tipo: Tipo, transacaoDelegate: TransacaoDelegate) {
+    fun chama(tipo: Tipo, delegate: (transacao: Transacao) -> Unit) {
         configuraCampoData()
         configuraCampoCategoria(tipo)
-        configuraFormulario(tipo, transacaoDelegate)
+        configuraFormulario(tipo, delegate)
     }
 
-    private fun configuraFormulario(tipo: Tipo, transacaoDelegate: TransacaoDelegate) {
+    private fun configuraFormulario(tipo: Tipo, delegate: (transacao: Transacao) -> Unit) {
 
         val titulo = tituloPor(tipo)
 
@@ -57,7 +57,7 @@ abstract class FormularioTransacaoDialog(
                     categoria = categoriaEmTexto
                 )
 
-                transacaoDelegate.delegate(transacaoCriada)
+                delegate(transacaoCriada)
             }
             .setNegativeButton("Cancelar", null)
             .show()
@@ -110,7 +110,8 @@ abstract class FormularioTransacaoDialog(
 
         campoData.setText(hoje.formataDataParaBrasileiro())
         campoData.setOnClickListener {
-            DatePickerDialog(context,
+            DatePickerDialog(
+                context,
                 { _, ano, mes, dia ->
                     val dataSelecionada = Calendar.getInstance()
                     dataSelecionada.set(ano, mes, dia)

@@ -32,29 +32,23 @@ class ListaTransacoesActivity : AppCompatActivity() {
     private fun adicionaDespesa(tipo: Tipo) {
         lista_transacoes_adiciona_despesa.setOnClickListener {
             AdicionaDialog(viewGroupDaActivity, this)
-                .chama(tipo, object : TransacaoDelegate {
-                    override fun delegate(transacao: Transacao) {
-                        atualizaTransacoes()
-                        lista_transacoes_adiciona_menu.close(true)
-                    }
-                })
+                .chama(tipo) {
+                    adiciona(it)
+                    lista_transacoes_adiciona_menu.close(true)
+                }
         }
     }
 
     private fun adicionaReceita(tipo: Tipo) {
         lista_transacoes_adiciona_receita.setOnClickListener {
             AdicionaDialog(viewGroupDaActivity, this)
-                .chama(
-                    tipo,
-                    object : TransacaoDelegate {
-                        override fun delegate(transacao: Transacao) {
-                            adiciona(transacao)
-                            lista_transacoes_adiciona_menu.close(true)
-                        }
-                    },
-                )
+                .chama(tipo) {
+                    adiciona(it)
+                    lista_transacoes_adiciona_menu.close(true)
+                }
         }
     }
+
 
     private fun adiciona(transacao: Transacao) {
         transacoes.add(transacao)
