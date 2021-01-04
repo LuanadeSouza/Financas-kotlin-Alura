@@ -1,6 +1,7 @@
 package br.com.luanadev.financasapplication.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import br.com.luanadev.financasapplication.R
@@ -9,16 +10,20 @@ import br.com.luanadev.financasapplication.model.Tipo
 import br.com.luanadev.financasapplication.model.Transacao
 import br.com.luanadev.financasapplication.ui.ResumoView
 import br.com.luanadev.financasapplication.ui.adapter.ListaTransacoesAdapter
-import br.com.luanadev.financasapplication.ui.dialog.Dialog
+import br.com.luanadev.financasapplication.ui.dialog.AdicionaDialog
+import br.com.luanadev.financasapplication.ui.dialog.AlteraDialog
 import kotlinx.android.synthetic.main.activity_lista_transacoes.*
 
 class ListaTransacoesActivity : AppCompatActivity() {
 
     private val transacoes: MutableList<Transacao> = mutableListOf()
+    private lateinit var viewDaActivity: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_transacoes)
 
+        viewDaActivity = window.decorView
         configuraResumo()
         configuraLista()
         adicionaReceita(Tipo.RECEITA)
@@ -27,10 +32,10 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
     private fun adicionaDespesa(tipo: Tipo) {
         lista_transacoes_adiciona_despesa.setOnClickListener {
-            Dialog(window.decorView as ViewGroup, this)
-                .chama(tipo, object : TransacaoDelegate {
+            AdicionaDialog(viewDaActivity as ViewGroup, this)
+                .show(tipo, object : TransacaoDelegate {
                     override fun delegate(transacao: Transacao) {
-                        atualizaTransacoes(transacao)
+                        atualizaTransacoes()
                         lista_transacoes_adiciona_menu.close(true)
                     }
                 })
@@ -39,11 +44,12 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
     private fun adicionaReceita(tipo: Tipo) {
         lista_transacoes_adiciona_receita.setOnClickListener {
-            Dialog(window.decorView as ViewGroup, this)
-                .chama(tipo,
+            AdicionaDialog(viewDaActivity as ViewGroup, this)
+                .show(
+                    tipo,
                     object : TransacaoDelegate {
                         override fun delegate(transacao: Transacao) {
-                            atualizaTransacoes(transacao)
+                            adiciona(transacao)
                             lista_transacoes_adiciona_menu.close(true)
                         }
                     },
@@ -51,19 +57,42 @@ class ListaTransacoesActivity : AppCompatActivity() {
         }
     }
 
-    private fun atualizaTransacoes(transacao: Transacao) {
+    private fun adiciona(transacao: Transacao) {
         transacoes.add(transacao)
+        atualizaTransacoes()
+    }
+
+    private fun atualizaTransacoes() {
         configuraLista()
         configuraResumo()
     }
 
     private fun configuraResumo() {
-        val view = window.decorView
-        val resumoView = ResumoView(this, view, transacoes)
+        val resumoView = ResumoView(this, viewDaActivity, transacoes)
         resumoView.atualiza()
     }
 
     private fun configuraLista() {
-        lista_transacoes_listview.adapter = ListaTransacoesAdapter(transacoes, this)
+        val listaTransacoesAdapter = ListaTransacoesAdapter(transacoes, this)
+        with(lista_transacoes_listview) {
+            adapter = listaTransacoesAdapter
+            setOnItemClickListener { _, _, position, _ ->
+                val transacao = transacoes[position]
+                altera(transacao, position)
+            }
+        }
+    }
+
+    private fun altera(
+        transacao: Transacao,
+        position: Int
+    ) {
+        AlteraDialog(viewDaActivity as ViewGroup, this).show(
+            transacao, object : TransacaoDelegate {
+                override fun delegate(transacao: Transacao) {
+                    transacoes[position] = transacao
+                    atualizaTransacoes()
+                }
+            })
     }
 }

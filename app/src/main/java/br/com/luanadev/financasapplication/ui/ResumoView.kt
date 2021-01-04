@@ -20,7 +20,7 @@ class ResumoView(
     private val corReceita = ContextCompat.getColor(context, R.color.receita)
     private val corDespesa = ContextCompat.getColor(context, R.color.despesa)
 
-    fun atualiza(){
+    fun atualiza() {
         adicionaReceita()
         adicionaDespesa()
         adicionaTotal()

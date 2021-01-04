@@ -18,15 +18,15 @@ import kotlinx.android.synthetic.main.form_transacao.view.*
 import java.math.BigDecimal
 import java.util.*
 
-class Dialog(private val viewGroup: ViewGroup,
-             private val context: Context) {
+class AdicionaDialog(private val viewGroup: ViewGroup,
+                     private val context: Context) {
 
     private val viewCriada = criaLayout()
     private val campoValor = viewCriada.form_transacao_valor
     private val campoCategoria = viewCriada.form_transacao_categoria
     private val campoData = viewCriada.form_transacao_data
 
-    fun chama(tipo: Tipo, transacaoDelegate: TransacaoDelegate) {
+    fun show(tipo: Tipo, transacaoDelegate: TransacaoDelegate) {
         configuraCampoData()
         configuraCampoCategoria(tipo)
         configuraFormulario(tipo, transacaoDelegate)
