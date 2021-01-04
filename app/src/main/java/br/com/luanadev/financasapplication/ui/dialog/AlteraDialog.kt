@@ -3,7 +3,6 @@ package br.com.luanadev.financasapplication.ui.dialog
 import android.content.Context
 import android.view.ViewGroup
 import br.com.luanadev.financasapplication.R
-import br.com.luanadev.financasapplication.delegate.TransacaoDelegate
 import br.com.luanadev.financasapplication.extension.formataDataParaBrasileiro
 import br.com.luanadev.financasapplication.model.Tipo
 import br.com.luanadev.financasapplication.model.Transacao

@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import br.com.luanadev.financasapplication.R
-import br.com.luanadev.financasapplication.delegate.TransacaoDelegate
 import br.com.luanadev.financasapplication.extension.convertePraCalendar
 import br.com.luanadev.financasapplication.extension.formataDataParaBrasileiro
 import br.com.luanadev.financasapplication.model.Tipo

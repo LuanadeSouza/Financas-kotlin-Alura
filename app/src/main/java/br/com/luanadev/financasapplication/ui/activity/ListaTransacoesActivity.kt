@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import br.com.luanadev.financasapplication.R
-import br.com.luanadev.financasapplication.delegate.TransacaoDelegate
 import br.com.luanadev.financasapplication.model.Tipo
 import br.com.luanadev.financasapplication.model.Transacao
 import br.com.luanadev.financasapplication.ui.ResumoView
@@ -71,21 +70,22 @@ class ListaTransacoesActivity : AppCompatActivity() {
             adapter = listaTransacoesAdapter
             setOnItemClickListener { _, _, position, _ ->
                 val transacao = transacoes[position]
-                altera(transacao, position)
+                chamaDialogAlteracao(transacao, position)
             }
         }
     }
 
-    private fun altera(
-        transacao: Transacao,
-        position: Int
-    ) {
-        AlteraDialog(viewDaActivity as ViewGroup, this).chama(
-            transacao, object : TransacaoDelegate {
-                override fun delegate(transacao: Transacao) {
-                    transacoes[position] = transacao
-                    atualizaTransacoes()
-                }
-            })
+    private fun chamaDialogAlteracao(transacao: Transacao, position: Int){
+        AlteraDialog(viewGroupDaActivity, this)
+            .chama(transacao) {
+                altera(it, position)
+            }
+    }
+
+    private fun altera(transacao: Transacao, position: Int) {
+        transacoes[position] = transacao
+        atualizaTransacoes()
     }
 }
+
+
