@@ -10,7 +10,7 @@ fun String.limitaEmAte(caracteres: Int): String{
     return this
 }
 
-fun String.covertePraCalendar(): Calendar {
+fun String.convertePraCalendar(): Calendar {
     val formatoBrasileiro = SimpleDateFormat("dd/MM/yyyy")
     val dataConvertida = formatoBrasileiro.parse(this)
     val data = Calendar.getInstance()

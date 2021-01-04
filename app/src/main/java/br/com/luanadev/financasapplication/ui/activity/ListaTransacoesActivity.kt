@@ -32,7 +32,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
     private fun adicionaDespesa(tipo: Tipo) {
         lista_transacoes_adiciona_despesa.setOnClickListener {
             AdicionaDialog(viewGroupDaActivity, this)
-                .show(tipo, object : TransacaoDelegate {
+                .chama(tipo, object : TransacaoDelegate {
                     override fun delegate(transacao: Transacao) {
                         atualizaTransacoes()
                         lista_transacoes_adiciona_menu.close(true)
@@ -44,7 +44,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
     private fun adicionaReceita(tipo: Tipo) {
         lista_transacoes_adiciona_receita.setOnClickListener {
             AdicionaDialog(viewGroupDaActivity, this)
-                .show(
+                .chama(
                     tipo,
                     object : TransacaoDelegate {
                         override fun delegate(transacao: Transacao) {
@@ -86,7 +86,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
         transacao: Transacao,
         position: Int
     ) {
-        AlteraDialog(viewDaActivity as ViewGroup, this).show(
+        AlteraDialog(viewDaActivity as ViewGroup, this).chama(
             transacao, object : TransacaoDelegate {
                 override fun delegate(transacao: Transacao) {
                     transacoes[position] = transacao
