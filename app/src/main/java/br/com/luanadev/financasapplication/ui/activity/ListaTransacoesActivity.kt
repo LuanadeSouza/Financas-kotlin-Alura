@@ -1,7 +1,11 @@
 package br.com.luanadev.financasapplication.ui.activity
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.com.luanadev.financasapplication.R
 import br.com.luanadev.financasapplication.model.Tipo
@@ -31,7 +35,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
     private fun adicionaDespesa(tipo: Tipo) {
         lista_transacoes_adiciona_despesa.setOnClickListener {
             AdicionaDialog(viewGroupDaActivity, this)
-                .chama(tipo) {
+                .show(tipo) {
                     adiciona(it)
                     lista_transacoes_adiciona_menu.close(true)
                 }
@@ -41,7 +45,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
     private fun adicionaReceita(tipo: Tipo) {
         lista_transacoes_adiciona_receita.setOnClickListener {
             AdicionaDialog(viewGroupDaActivity, this)
-                .chama(tipo) {
+                .show(tipo) {
                     adiciona(it)
                     lista_transacoes_adiciona_menu.close(true)
                 }
@@ -72,10 +76,30 @@ class ListaTransacoesActivity : AppCompatActivity() {
                 val transacao = transacoes[position]
                 chamaDialogAlteracao(transacao, position)
             }
+            setOnCreateContextMenuListener { menu, _, _ ->
+                menu.add(Menu.NONE, 1, Menu.NONE, "Remover")
+
+            }
         }
     }
 
-    private fun chamaDialogAlteracao(transacao: Transacao, position: Int){
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val idDoMenu = item.itemId
+        if (idDoMenu == 1){
+            val adapterMenuInfo = item.menuInfo as AdapterView.AdapterContextMenuInfo
+            val positionDaTransacao = adapterMenuInfo.position
+            remove(positionDaTransacao)
+        }
+        return super.onContextItemSelected(item)
+    }
+
+    private fun remove(position: Int) {
+        transacoes.removeAt(position)
+        atualizaTransacoes()
+        Toast.makeText(this, "Item Removido", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun chamaDialogAlteracao(transacao: Transacao, position: Int) {
         AlteraDialog(viewGroupDaActivity, this)
             .chama(transacao) {
                 altera(it, position)

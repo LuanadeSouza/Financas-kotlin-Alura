@@ -21,7 +21,7 @@ class AlteraDialog(viewGroup: ViewGroup, context: Context) :
 
     fun chama(transacao: Transacao, delegate: (transacao: Transacao) -> Unit) {
         val tipo = transacao.tipo
-        super.chama(tipo, delegate)
+        super.show(tipo, delegate)
 
         inicializaCampos(transacao, tipo)
     }

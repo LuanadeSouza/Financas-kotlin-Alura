@@ -28,7 +28,7 @@ abstract class FormularioTransacaoDialog(
     protected val campoData = viewCriada.form_transacao_data
     abstract val tituloBotaoPositivo: String
 
-    fun chama(tipo: Tipo, delegate: (transacao: Transacao) -> Unit) {
+    fun show(tipo: Tipo, delegate: (transacao: Transacao) -> Unit) {
         configuraCampoData()
         configuraCampoCategoria(tipo)
         configuraFormulario(tipo, delegate)
@@ -82,14 +82,7 @@ abstract class FormularioTransacaoDialog(
     private fun configuraCampoCategoria(tipo: Tipo) {
 
         val categorias = categoriasPor(tipo)
-
-        val adapter = ArrayAdapter
-            .createFromResource(
-                context,
-                categorias,
-                android.R.layout.simple_spinner_dropdown_item
-            )
-
+        val adapter = ArrayAdapter.createFromResource(context, categorias, android.R.layout.simple_spinner_dropdown_item)
         campoCategoria.adapter = adapter
     }
 
